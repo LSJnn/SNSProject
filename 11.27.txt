@@ -1,0 +1,72 @@
+도커 : 환경영향을 안받음.
+
+apply plugin: 'c'
+
+test {
+    useJUnitPlatform()
+}
+
+    test{
+        systemProperty "java.path.library",
+        file("${buildDir}/libs/hello/shared").absolutePath
+    }
+
+    model {
+        platform {
+            x64{
+                architecture "x64"
+            }
+        }
+        toolchains{
+            gcc(Gcc){
+                target("x64"){
+                    cComplier.executable = "path를 C:\mingw_w64\mingw64\bin\gcc 경로 입력하면됨."
+                }
+            }
+        }
+        components{
+            hello(NativeLibrarySpec){
+                source{
+                    c{
+                        source{
+                            srcDir 'src/hello/c'
+                            include "**/*.c"
+                        }
+                    }
+                }
+            }
+            buildTypes{
+                debug
+                release
+            }
+            
+            binaries.all{
+                cComplier.args "-m64"
+                cComplier.args "-I${org.gradle.internal.jvm.Jvm.current().javaHome}/include"
+                cComplier.args "-I${org.gradle.internal.jvm.Jvm.current().javaHome}/include/win32"
+
+            }
+        }
+    }
+test.dependsOn 'helloSharedLibrary'
+
+ Sigcheck 다운 --> 경로 복사. 시스템 : 시스템 속성 :고급 : 환경변수 : path에 경로 붙여넣기
+	--> 윈도우 전용 ㅍ포맷 파일. 
+전에 application.properties --> application.yaml
+
+전 주총 다운로드 프로그램: 
+docker, jetbrain toolbox-ultimate , anaconda
+cmd에 sigcheck 입력.후 동의 
+ http://mingw-w64.org/doku.php
+mingw x86_64 다운
+아키텍처 x86_64
+
+띄어쓰기없는 파일경로에 c파일에 바로
+ bin 의 경로 복붙  --->cmd 에 gcc\ --version
+
+?? bin이 실행파일 모음집
+	--> c 컴파일가능.in Spring에서.
+
+cd demo 
+cd build
+ cd 

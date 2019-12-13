@@ -1,0 +1,32 @@
+("/books/{isbn}") -- 중괄호가필요. 
+Tomcat started on port(s): 8080 	에서 포트 주소 확인.
+
+mvc패턴 : 
+	m: 모델 : 넣고자 하는데이터들 
+	v : 뷰, 화면
+	c: 컨트롤러 . 데이터 처리 어떻게?
+		--> @RestController/@Contreoller 무조건 있어야함. 
+			?? http 로 요청처리하는 작업을 얘네가함. 
+			localdb:books/isbn주소 등등 넘겨주는일/
+		@RequestMapping("/books") : 서버 뒤에다 book를 넣었을 떄 어떻게 처리
+					books 르 넣었을 때 얘가 작동함.
+		url요청 처리 : 컨트롤러--데이터 가공 필요(처리 후 뷰로 보여주ㅠㅁ.)
+
+	--> 스프링으로 만들고자 할떄 ,SpringBoot---/ REstCOntroller(url받음) /Service(처리) .
+
+스프링쓰는이유; 의존성 문제 해결. 무결성. 인터페이스도 결국 의존도 있음 --> 완전 독립적:어노테이션.
+
+		@getMapping : 웹에서 데이터 전송방식 2中get/post
+			get : url 에 물음표 = ;;;		:: 책검색 같은 경우 주소 보고 ;/.링크 걸고 가야함.
+				==> 데이터 공개필요 시 ex) 
+				책 주소.https://naver.com/book/bid=1023453
+			post : json 바디에넣음. --postman	: 중요 데이터. ? url = 무슨데이터 썼는지 다 나옴. 
+							--> 80번 포트면. 그곳만 보면 알 수 있음.
+				==> 비공개. ex) 책 내용
+		@getMapping : /books 쳤을때 나오는 것.설정
+		@getMapping({isbn})
+			@PathVariable : "isbn":이걸 객체삼아서 각각 다른거 보내주겠다.
+		@PostMapping : Runner가 가지고 있느 book 개체를다시줌. 
+			@RequestBody : 데이터를제이슨으로 만듦. = 포스트맨에서 \만든것과 같은 형식,. 을 다시자바로 만들어줌.
+				/isbn 입력시 다시제이슨 창 만들어줌.
+			

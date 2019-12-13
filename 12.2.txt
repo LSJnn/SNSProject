@@ -1,0 +1,69 @@
+포트그레스 db 설정
+
+도커에서 아이피 등 확인하고 켜져있는 상태.
+name : 
+
+host : 아이피 주소
+
+데이터베이스 localdb
+url에 jdbc:postgresql://192.168.99.100:5432/localdb 
+이런 형태로.
+
+드라이버 : + potgreSql 로 설정 후 드라이버 적용시켜줌.
+
+
+
+create schema musicdb;		// db 생성
+
+create table singer(		//테이블 생성
+                       ID SERIAL PRIMARY KEY,
+                       FIRST_NAME VARCHAR(60) NOT NULL,
+                       LAST_NAME VARCHAR(40) NOT NULL,
+                       BIRTH_DATE date,
+                       CONSTRAINT UQ_SINGER_1 UNIQUE (FIRST_NAME, LAST_NAME)
+);
+
+CREATE TABLE album(`		//테이블 생성
+                      ID SERIAL PRIMARY  KEY,
+                      SINGER_ID INT NOT NULL,
+                      TITLE VARCHAR(100) NOT NULL,
+                      RELEASE_DATE    date,
+                      CONSTRAINT UQ_SINGER_ALBUM_1 UNIQUE(SINGER_ID,TITLE),
+                      CONSTRAINT FK_ALBUM FOREIGN KEY(SINGER_ID) REFERENCES singer(ID)
+);
+
+select * FROM information_schema.schemata;
+select * from singer;
+select * from album;
+
+drop table album;
+drop table singer;
+
+생성 후 resource에 파일 생성. 
+그밑에 파일 생성: test_data.sql		sql 형식.
+insert into singer (first_name , last_name, birth_date)
+    values('Dracosky','Smith', '1977-07-13');
+
+insert into singer (first_name , last_name, birth_date)
+    values('Eric','Clapton', '1959-03-12');
+
+insert into singer (first_name , last_name, birth_date)
+    values('Donald','Thompson', '1990-07-15');
+
+
+insert into album (singer_id, title, release_date)
+    values(1,'Go Go Go ','2019-09-09');
+insert into album (singer_id, title, release_date)
+    values(2,'fire Emblem ','2009-05-03');
+insert into album (singer_id, title, release_date)
+    values(3,'On Cruise Reporting ','1994-02-23');
+
+ 이미 생성됨. 오류가 나올 수 있음. 반복 실행 시
+
+
+도커위에 포스트그레스를 까는 것.,
+
+시스템 : 
+임베디드 ㅣ로봇 ㅣ 슈학, ㅣ
+커널 ㅣ 순수 sw
+시스템 프로그래밍 : 윈도우 앱

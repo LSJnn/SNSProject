@@ -1,0 +1,35 @@
+	
+ 
+ if(args.length> 0){
+            for(int i = 0 ; i < args.length;i++){
+                System.out.println(args[i]);
+            }
+        }else{
+            System.out.println("There are no argument");
+        }
+
+        SpringApplication.run(DemoApplication.class, args);
+    }
+
+--> args : configuration --> program argument의 창. 에입력한 것이 실행됨.
+<><><><><><><><><><><<><><><><><><><><><><><><><><><><><><><><><><><><>><><><><><><><>
+spring for 서버/ """""소프트웨어 아키텍처""""""" : 
+ex) 모든 기능이 main 함수에. --> 천 줄정도는 가능 but 만 줄은 불가.
+ex2) main db(세션 맺기, 사용자 추가 삭제 등 ) web(데이터 받아오기 View ) 등 구상.
+	--> db 관련 함수 만듬 --> 사용자 추가 시새로운 기능 원함. :의존성있는애들전부 바꿔야함. FRont(html) 작업도 다.
+		다 제각기기능을 가진 data 객체가 있음. --> 사용하는 클래스에 기능 추가.--> 디버그 필요.(순서 흐름)
+
+	==> 방지위해 나온 것이 Spring : 의존도 낮추기.
+			 
+interface: 	 implements반드시 메소드 구현해야함. -> 기능추가가능 	test()
+abstrace class : 변수와 메서드를같이가지고 올 수 있지만 intercafef랑 같. 
+
+\\\\각 클래스에 인터페이스 implement --> 각각 기능 다름. 변수 변경 가능.!:" 클래스/메소드 추가로!\\\
+	: 유지보수 관점에서 중요
+
+
+
+==> interface화 하면 의존성 낮아짐.		
+ 	데이터 변경됨.(타입 변경도. object로 받아서 String/ Int/ 등으로 변경하면 됨. 배열로 받아도 변경가능)	
+
+@렌더링 : 만든다.
